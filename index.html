@@ -7,7 +7,7 @@
 <title>Yoga to Go — Mentoring the Whole Leader</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -16,37 +16,18 @@
     --amber: #E08840;
     --ember: #C96A2B;
     --cream: #F5F0E8;
-    --cream-dark: #EDE7DA;
+    --black: #111111;
   }
 
   html, body {
     height: 100%;
     background: var(--cream);
-    color: var(--navy);
+    color: var(--black);
     font-family: 'Cormorant Garamond', Georgia, serif;
     overflow-x: hidden;
   }
 
-  /* Subtle texture overlay */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image:
-      repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 3px,
-        rgba(13,31,60,0.012) 3px,
-        rgba(13,31,60,0.012) 4px
-      );
-    pointer-events: none;
-    z-index: 0;
-  }
-
   .page {
-    position: relative;
-    z-index: 1;
     min-height: 100vh;
     display: grid;
     grid-template-rows: auto 1fr auto;
@@ -59,14 +40,12 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 56px;
-    opacity: 0;
-    animation: fadeDown 0.8s ease forwards 0.1s;
+    height: 58px;
   }
 
   .top-bar-brand {
     font-family: 'Cinzel', serif;
-    font-size: 0.78rem;
+    font-size: 0.85rem;
     font-weight: 600;
     letter-spacing: 0.18em;
     color: var(--cream);
@@ -75,224 +54,157 @@
 
   .top-bar-contact {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 0.85rem;
-    font-weight: 300;
+    font-size: 1rem;
+    font-weight: 600;
     color: var(--amber);
     letter-spacing: 0.04em;
     text-decoration: none;
     transition: color 0.2s;
   }
-  .top-bar-contact:hover { color: var(--cream); }
+  .top-bar-contact:hover { color: white; }
 
-  /* ── MAIN CONTENT ── */
+  /* Amber accent line below top bar */
+  .amber-line {
+    height: 4px;
+    background: var(--amber);
+  }
+
+  /* ── MAIN ── */
   .main {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: clamp(3rem, 8vw, 7rem) clamp(1.5rem, 5vw, 4rem);
+    padding: clamp(3rem, 8vw, 6rem) clamp(1.5rem, 5vw, 4rem);
     text-align: center;
-  }
-
-  /* Amber rule above logo */
-  .top-rule {
-    width: 48px;
-    height: 2px;
-    background: var(--amber);
-    margin-bottom: 2.5rem;
-    opacity: 0;
-    animation: fadeUp 0.7s ease forwards 0.3s;
-  }
-
-  /* Seal / Monogram */
-  .seal {
-    width: 88px;
-    height: 88px;
-    border-radius: 50%;
-    border: 1.5px solid var(--navy);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 2.5rem;
-    position: relative;
-    opacity: 0;
-    animation: fadeUp 0.7s ease forwards 0.45s;
-  }
-  .seal::before {
-    content: '';
-    position: absolute;
-    inset: 5px;
-    border-radius: 50%;
-    border: 0.5px solid rgba(13,31,60,0.25);
-  }
-  .seal-letters {
-    font-family: 'Cinzel', serif;
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: var(--navy);
-    letter-spacing: 0.06em;
-    line-height: 1;
-  }
-  .seal-sub {
-    font-family: 'Cinzel', serif;
-    font-size: 0.38rem;
-    font-weight: 400;
-    letter-spacing: 0.22em;
-    color: var(--ember);
-    text-transform: uppercase;
-    margin-top: 4px;
   }
 
   /* Brand name */
   .brand-name {
     font-family: 'Cinzel', serif;
-    font-size: clamp(1.7rem, 4.5vw, 3rem);
+    font-size: clamp(2rem, 5vw, 3.4rem);
     font-weight: 600;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.14em;
     color: var(--navy);
     text-transform: uppercase;
-    margin-bottom: 0.5rem;
-    opacity: 0;
-    animation: fadeUp 0.7s ease forwards 0.6s;
+    margin-bottom: 0.6rem;
   }
 
+  /* Tagline */
   .tagline {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(1rem, 2.5vw, 1.35rem);
-    font-weight: 300;
+    font-size: clamp(1.2rem, 2.8vw, 1.6rem);
+    font-weight: 600;
     font-style: italic;
     color: var(--ember);
-    letter-spacing: 0.04em;
-    margin-bottom: 2.8rem;
-    opacity: 0;
-    animation: fadeUp 0.7s ease forwards 0.75s;
+    letter-spacing: 0.03em;
+    margin-bottom: 2.4rem;
   }
 
   /* Divider */
   .divider {
     display: flex;
     align-items: center;
-    gap: 1.2rem;
-    width: min(480px, 90vw);
-    margin-bottom: 2.8rem;
-    opacity: 0;
-    animation: fadeUp 0.7s ease forwards 0.88s;
+    gap: 1rem;
+    width: min(500px, 90vw);
+    margin-bottom: 2.4rem;
   }
-  .divider-line {
-    flex: 1;
-    height: 1px;
-    background: rgba(13,31,60,0.2);
-  }
+  .divider-line { flex: 1; height: 1.5px; background: var(--navy); opacity: 0.2; }
   .divider-diamond {
-    width: 6px;
-    height: 6px;
+    width: 7px; height: 7px;
     background: var(--amber);
     transform: rotate(45deg);
     flex-shrink: 0;
   }
 
-  /* Hero statement */
+  /* Hero */
   .hero {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(1.25rem, 3vw, 1.75rem);
-    font-weight: 300;
+    font-size: clamp(1.4rem, 3.2vw, 2rem);
+    font-weight: 600;
     font-style: italic;
-    color: var(--navy);
-    line-height: 1.55;
-    max-width: 520px;
-    margin-bottom: 1.6rem;
-    opacity: 0;
-    animation: fadeUp 0.7s ease forwards 1s;
+    color: var(--black);
+    line-height: 1.5;
+    max-width: 540px;
+    margin-bottom: 1.4rem;
   }
 
-  /* Supporting line */
+  /* Supporting */
   .supporting {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(0.92rem, 1.8vw, 1.05rem);
-    font-weight: 300;
-    color: rgba(13,31,60,0.65);
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    font-weight: 400;
+    color: var(--navy);
     line-height: 1.7;
-    max-width: 460px;
+    max-width: 480px;
     margin-bottom: 3rem;
-    opacity: 0;
-    animation: fadeUp 0.7s ease forwards 1.12s;
   }
 
-  /* Coming soon badge */
+  /* Badge */
   .badge {
     display: inline-block;
-    border: 1px solid var(--amber);
-    padding: 0.5rem 1.6rem;
+    border: 2px solid var(--amber);
+    padding: 0.55rem 1.8rem;
     font-family: 'Cinzel', serif;
-    font-size: 0.68rem;
-    font-weight: 400;
-    letter-spacing: 0.22em;
-    color: var(--amber);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    color: var(--navy);
     text-transform: uppercase;
     margin-bottom: 2.4rem;
-    opacity: 0;
-    animation: fadeUp 0.7s ease forwards 1.24s;
   }
 
-  /* Notify / email line */
+  /* Contact */
   .notify {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(0.88rem, 1.6vw, 1rem);
-    font-weight: 300;
-    color: rgba(13,31,60,0.55);
-    margin-bottom: 0.4rem;
-    opacity: 0;
-    animation: fadeUp 0.7s ease forwards 1.35s;
+    font-size: clamp(1rem, 1.8vw, 1.1rem);
+    font-weight: 400;
+    color: var(--black);
+    margin-bottom: 0.5rem;
   }
 
   .email-link {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(0.95rem, 1.8vw, 1.05rem);
-    font-weight: 400;
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    font-weight: 600;
     color: var(--ember);
     text-decoration: none;
-    border-bottom: 1px solid rgba(201,106,43,0.35);
-    padding-bottom: 1px;
+    border-bottom: 2px solid var(--ember);
+    padding-bottom: 2px;
     transition: color 0.2s, border-color 0.2s;
-    opacity: 0;
-    animation: fadeUp 0.7s ease forwards 1.45s;
     display: inline-block;
   }
-  .email-link:hover {
-    color: var(--amber);
-    border-color: var(--amber);
-  }
+  .email-link:hover { color: var(--amber); border-color: var(--amber); }
 
-  /* RE sibling note */
+  /* Sibling */
   .sibling {
     margin-top: 3.5rem;
     padding-top: 2rem;
-    border-top: 1px solid rgba(13,31,60,0.12);
-    width: min(480px, 90vw);
-    opacity: 0;
-    animation: fadeUp 0.7s ease forwards 1.6s;
+    border-top: 1.5px solid rgba(13,31,60,0.2);
+    width: min(500px, 90vw);
   }
   .sibling-label {
     font-family: 'Cinzel', serif;
-    font-size: 0.6rem;
+    font-size: 0.65rem;
+    font-weight: 600;
     letter-spacing: 0.2em;
-    color: rgba(13,31,60,0.4);
+    color: var(--navy);
     text-transform: uppercase;
-    margin-bottom: 0.6rem;
+    margin-bottom: 0.7rem;
+    opacity: 0.6;
   }
   .sibling-link {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 0.92rem;
-    font-weight: 300;
+    font-size: 1rem;
+    font-weight: 400;
     font-style: italic;
     color: var(--navy);
     text-decoration: none;
-    border-bottom: 1px solid rgba(13,31,60,0.2);
+    border-bottom: 1px solid rgba(13,31,60,0.3);
     padding-bottom: 1px;
-    transition: color 0.2s, border-color 0.2s;
+    transition: color 0.2s;
   }
-  .sibling-link:hover { color: var(--amber); border-color: var(--amber); }
+  .sibling-link:hover { color: var(--amber); }
 
   /* ── FOOTER ── */
   .footer {
@@ -301,41 +213,20 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.6rem;
-    opacity: 0;
-    animation: fadeUp 0.6s ease forwards 1.7s;
+    gap: 0.8rem;
   }
   .footer-text {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 0.78rem;
-    font-weight: 300;
-    color: rgba(245,240,232,0.45);
-    letter-spacing: 0.06em;
+    font-family: 'Cinzel', serif;
+    font-size: 0.72rem;
+    font-weight: 400;
+    color: rgba(245,240,232,0.7);
+    letter-spacing: 0.08em;
   }
   .footer-dot {
-    width: 3px;
-    height: 3px;
+    width: 4px; height: 4px;
     background: var(--amber);
     border-radius: 50%;
     flex-shrink: 0;
-    opacity: 0.6;
-  }
-
-  /* ── ANIMATIONS ── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(16px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes fadeDown {
-    from { opacity: 0; transform: translateY(-10px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 480px) {
-    .top-bar { height: 48px; }
-    .seal { width: 72px; height: 72px; }
-    .seal-letters { font-size: 1.2rem; }
   }
 </style>
 </head>
@@ -348,14 +239,9 @@
       Info@TheRegulatedExecutive.com
     </a>
   </header>
+  <div class="amber-line"></div>
 
   <main class="main">
-    <div class="top-rule"></div>
-
-    <div class="seal" aria-hidden="true">
-      <span class="seal-letters">YTG</span>
-      <span class="seal-sub">Est. 2025</span>
-    </div>
 
     <h1 class="brand-name">Yoga to Go</h1>
     <p class="tagline">Mentoring the Whole Leader</p>
@@ -369,7 +255,7 @@
     <p class="hero">"You carry your community.<br>Who carries you?"</p>
 
     <p class="supporting">
-      Because the most important thing you bring to your community<br>
+      Because the most important thing you bring to your community
       is yourself — regulated, grounded, and whole.
     </p>
 
@@ -386,6 +272,7 @@
         The Regulated Executive — theregulatedexecutive.com
       </a>
     </div>
+
   </main>
 
   <footer class="footer">
