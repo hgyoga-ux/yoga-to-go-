@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rooted Leader Certification | Yoga to Go</title>
+  <meta name="description" content="The Rooted Leader Certification is the train-the-trainer pathway for facilitators called to bring embodied, nervous-system-aware programming into their communities." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --forest:  #2C4A3E;
+      --sage:    #6B8F71;
+      --stone:   #4A5240;
+      --cream:   #F5F0E8;
+      --parchment: #EDE7D9;
+      --warm-grey: #9B9B8A;
+      --ink:     #1E2A1F;
+      --gold:    #B8963E;
+
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body:    'Jost', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      font-weight: 300;
+      color: var(--ink);
+      background: var(--cream);
+      line-height: 1.7;
+    }
+
+    /* ── NAV ───────────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(245,240,232,0.96);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid rgba(107,143,113,0.25);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2.5rem;
+      height: 64px;
+    }
+    .nav-brand {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: var(--forest);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+    }
+    .nav-links {
+      display: flex; gap: 2rem; list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--stone);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--forest); }
+
+    /* ── HERO ──────────────────────────────────────────────── */
+    .hero {
+      min-height: 92vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding-top: 64px;
+      overflow: hidden;
+    }
+    .hero-text {
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 6rem 4rem 6rem 5rem;
+    }
+    .hero-eyebrow {
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 1.5rem;
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 4.5vw, 5rem);
+      font-weight: 300;
+      line-height: 1.1;
+      color: var(--forest);
+      margin-bottom: 0.5rem;
+    }
+    .hero-title em {
+      font-style: italic;
+      font-weight: 300;
+      color: var(--sage);
+    }
+    .hero-sub {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--warm-grey);
+      margin-bottom: 2rem;
+    }
+    .hero-desc {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: var(--stone);
+      max-width: 42ch;
+      margin-bottom: 2.5rem;
+    }
+    .hero-meta {
+      display: flex; gap: 2rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--warm-grey);
+      border-top: 1px solid rgba(107,143,113,0.3);
+      padding-top: 1.5rem;
+    }
+    .hero-meta span strong {
+      display: block;
+      font-size: 1.4rem;
+      font-family: var(--font-display);
+      font-weight: 500;
+      color: var(--forest);
+      letter-spacing: 0;
+      text-transform: none;
+      line-height: 1;
+      margin-bottom: 0.2rem;
+    }
+    .hero-visual {
+      background: var(--forest);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-visual::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 80% at 60% 40%, rgba(107,143,113,0.3) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at 30% 70%, rgba(184,150,62,0.1) 0%, transparent 60%);
+    }
+    .hero-visual-inner {
+      position: relative; z-index: 1;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      height: 100%;
+      padding: 4rem 3rem;
+    }
+    .tree-glyph {
+      font-size: 9rem;
+      line-height: 1;
+      margin-bottom: 2rem;
+      filter: drop-shadow(0 4px 24px rgba(0,0,0,0.3));
+      animation: sway 8s ease-in-out infinite;
+    }
+    @keyframes sway {
+      0%, 100% { transform: rotate(-1deg); }
+      50%       { transform: rotate(1deg); }
+    }
+    .hero-quote {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-style: italic;
+      color: rgba(245,240,232,0.9);
+      text-align: center;
+      line-height: 1.5;
+      max-width: 28ch;
+    }
+    .hero-quote cite {
+      display: block;
+      font-family: var(--font-body);
+      font-style: normal;
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(107,143,113,0.8);
+      margin-top: 1rem;
+    }
+
+    /* ── CTA STRIP ─────────────────────────────────────────── */
+    .cta-strip {
+      background: var(--forest);
+      color: var(--cream);
+      padding: 2.5rem 5rem;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 2rem;
+    }
+    .cta-strip p {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-style: italic;
+      opacity: 0.9;
+    }
+    .btn {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 0.9rem 2.2rem;
+      border: 1px solid currentColor;
+      transition: all 0.25s;
+      white-space: nowrap;
+    }
+    .btn-light {
+      color: var(--cream);
+      border-color: rgba(245,240,232,0.5);
+    }
+    .btn-light:hover {
+      background: var(--cream);
+      color: var(--forest);
+      border-color: var(--cream);
+    }
+    .btn-forest {
+      color: var(--forest);
+      border-color: var(--forest);
+    }
+    .btn-forest:hover {
+      background: var(--forest);
+      color: var(--cream);
+    }
+
+    /* ── SECTIONS ──────────────────────────────────────────── */
+    section { padding: 6rem 5rem; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+
+    .section-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3vw, 3rem);
+      font-weight: 300;
+      color: var(--forest);
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+    .section-title em { font-style: italic; color: var(--sage); }
+    .section-body {
+      font-size: 0.97rem;
+      color: var(--stone);
+      max-width: 65ch;
+      line-height: 1.85;
+    }
+    .section-body p + p { margin-top: 1rem; }
+    .divider {
+      width: 60px; height: 1px;
+      background: var(--sage);
+      margin: 2rem 0;
+    }
+
+    /* ── ABOUT GRID ─────────────────────────────────────────── */
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 5rem; align-items: start;
+    }
+
+    /* ── MODULE TABLE ───────────────────────────────────────── */
+    .modules-section { background: var(--parchment); }
+    .modules-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5px;
+      background: rgba(107,143,113,0.3);
+      border: 1.5px solid rgba(107,143,113,0.3);
+      margin-top: 3rem;
+    }
+    .module-card {
+      background: var(--cream);
+      padding: 2rem 1.5rem;
+      position: relative;
+      transition: background 0.2s;
+    }
+    .module-card:hover { background: white; }
+    .module-num {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      font-weight: 300;
+      color: rgba(107,143,113,0.35);
+      line-height: 1;
+      margin-bottom: 0.75rem;
+    }
+    .module-title {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--forest);
+      line-height: 1.3;
+      margin-bottom: 0.75rem;
+    }
+    .module-hours {
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 0.75rem;
+    }
+    .module-desc {
+      font-size: 0.85rem;
+      color: var(--warm-grey);
+      line-height: 1.65;
+    }
+    .modules-total {
+      margin-top: 1.5rem;
+      display: flex; justify-content: flex-end;
+      align-items: center; gap: 1rem;
+    }
+    .modules-total span {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: var(--forest);
+    }
+    .modules-total small {
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--warm-grey);
+    }
+
+    /* ── PATHWAY ────────────────────────────────────────────── */
+    .pathway-grid {
+      display: grid; grid-template-columns: 1fr 1fr 1fr;
+      gap: 3rem; margin-top: 3rem;
+    }
+    .pathway-item {
+      border-top: 2px solid var(--sage);
+      padding-top: 1.5rem;
+    }
+    .pathway-icon {
+      font-size: 2rem; margin-bottom: 1rem;
+    }
+    .pathway-title {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: var(--forest);
+      margin-bottom: 0.75rem;
+    }
+    .pathway-body {
+      font-size: 0.88rem;
+      color: var(--stone);
+      line-height: 1.75;
+    }
+
+    /* ── WHO ─────────────────────────────────────────────────── */
+    .who-section {
+      background: var(--forest);
+      color: var(--cream);
+    }
+    .who-section .section-title { color: var(--cream); }
+    .who-section .section-title em { color: rgba(107,143,113,0.9); }
+    .who-section .divider { background: rgba(107,143,113,0.6); }
+    .who-list {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1px; background: rgba(245,240,232,0.1);
+      margin-top: 3rem;
+      border: 1px solid rgba(245,240,232,0.1);
+    }
+    .who-item {
+      padding: 2rem 1.75rem;
+      background: rgba(44,74,62,0.6);
+    }
+    .who-item-title {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--cream);
+      margin-bottom: 0.5rem;
+    }
+    .who-item-body {
+      font-size: 0.85rem;
+      color: rgba(245,240,232,0.65);
+      line-height: 1.7;
+    }
+    .who-note {
+      margin-top: 2.5rem;
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-style: italic;
+      color: rgba(245,240,232,0.75);
+      max-width: 65ch;
+      line-height: 1.65;
+    }
+
+    /* ── ENROL ───────────────────────────────────────────────── */
+    .enrol-section {
+      text-align: center;
+      padding: 7rem 5rem;
+    }
+    .enrol-section .section-title {
+      max-width: 18ch; margin: 0 auto 1.5rem;
+    }
+    .enrol-section .section-body {
+      max-width: 52ch; margin: 0 auto 2.5rem;
+      text-align: center;
+    }
+
+    /* ── FOOTER ─────────────────────────────────────────────── */
+    footer {
+      background: var(--ink);
+      color: rgba(245,240,232,0.55);
+      padding: 2.5rem 5rem;
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 0.8rem;
+    }
+    footer a {
+      color: rgba(245,240,232,0.55);
+      text-decoration: none;
+    }
+    footer a:hover { color: var(--cream); }
+    .footer-brand {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      color: rgba(245,240,232,0.8);
+    }
+
+    /* ── SCROLL REVEAL ──────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ── RESPONSIVE ─────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-visual { min-height: 40vh; }
+      .hero-text { padding: 4rem 2rem; }
+      section { padding: 4rem 2rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .modules-grid { grid-template-columns: 1fr 1fr; }
+      .pathway-grid { grid-template-columns: 1fr; }
+      .who-list { grid-template-columns: 1fr; }
+      nav { padding: 0 1.5rem; }
+      .nav-links { gap: 1.2rem; }
+      .cta-strip { flex-direction: column; padding: 2.5rem 2rem; text-align: center; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem; }
+    }
+    @media (max-width: 600px) {
+      .modules-grid { grid-template-columns: 1fr; }
+      .who-list { grid-template-columns: 1fr; }
+      .hero-meta { flex-wrap: wrap; gap: 1rem; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="/" class="nav-brand">Yoga to Go</a>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/#about">About</a></li>
+      <li><a href="/#mentoring">The Mentoring</a></li>
+      <li><a href="/#grounded">The Grounded Leader</a></li>
+      <li><a href="rooted-leader-certification.html" class="active">Certification</a></li>
+      <li><a href="/#connect">Connect</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-text">
+      <p class="hero-eyebrow">Yoga to Go · Train-the-Trainer</p>
+      <h1 class="hero-title">Rooted Leader<br><em>Certification</em></h1>
+      <p class="hero-sub">Mentoring the Whole Leader</p>
+      <p class="hero-desc">
+        A train-the-trainer pathway for people called to bring embodied, 
+        nervous-system-aware programming into their communities — 
+        with no yoga background required.
+      </p>
+      <div class="hero-meta">
+        <span><strong>8</strong> Modules</span>
+        <span><strong>50</strong> Hours Total</span>
+        <span><strong>Online</strong> Self-Paced</span>
+        <span><strong>Live</strong> Practicum</span>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-visual-inner">
+        <div class="tree-glyph">🌳</div>
+        <blockquote class="hero-quote">
+          You cannot guide someone somewhere<br>you have not been.
+          <cite>— Rooted Leader Certification</cite>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA STRIP -->
+  <div class="cta-strip">
+    <p>Ready to bring this work to your community?</p>
+    <a href="/#connect" class="btn btn-light">Begin the Conversation</a>
+  </div>
+
+  <!-- ABOUT -->
+  <section>
+    <div class="section-inner about-grid">
+      <div class="reveal">
+        <p class="section-label">About the Program</p>
+        <h2 class="section-title">Built from the<br><em>inside out</em></h2>
+        <div class="divider"></div>
+        <div class="section-body">
+          <p>
+            The Rooted Leader Certification is the train-the-trainer pathway for people who want 
+            to bring embodied, nervous-system-aware programming into their communities. It assumes 
+            no prior facilitation experience — only a genuine calling to work with young people and 
+            a willingness to do the inner work that good facilitation requires.
+          </p>
+          <p>
+            The course is built from the inside out. Trainees first move through core content as 
+            participants — because you cannot guide someone somewhere you have not been. From there, 
+            the course builds outward: adolescent development, trauma-informed practice, facilitation 
+            skills, curriculum delivery, and a live practicum.
+          </p>
+          <p>
+            Fifty hours is enough time to develop the competence and the confidence to hold this 
+            space well. Certification is the beginning of an ongoing practice — and of membership 
+            in the Rooted Leader community.
+          </p>
+        </div>
+      </div>
+      <div class="reveal" style="transition-delay:0.15s">
+        <p class="section-label">Certification Pathway</p>
+        <h2 class="section-title">Three steps to<br><em>certification</em></h2>
+        <div class="divider"></div>
+        <div class="pathway-grid" style="grid-template-columns:1fr; gap:1.5rem; margin-top:1rem;">
+          <div class="pathway-item">
+            <div class="pathway-title">Complete All Eight Modules</div>
+            <div class="pathway-body">
+              Move through 50 hours of online, self-paced learning — experiencing the content 
+              as a participant before stepping into the facilitator role.
+            </div>
+          </div>
+          <div class="pathway-item">
+            <div class="pathway-title">Submit Your Delivery Plan</div>
+            <div class="pathway-body">
+              Design a complete facilitator plan for one full session, adapted for a 
+              specific community context of your choosing.
+            </div>
+          </div>
+          <div class="pathway-item">
+            <div class="pathway-title">Complete the Live Practicum</div>
+            <div class="pathway-body">
+              Lead a 30-minute facilitated segment with peers as participants. Receive 
+              structured mentor feedback. Earn your certification.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODULES -->
+  <section class="modules-section">
+    <div class="section-inner">
+      <div class="reveal">
+        <p class="section-label">Program Structure</p>
+        <h2 class="section-title">Eight modules.<br><em>One transformation.</em></h2>
+      </div>
+      <div class="modules-grid reveal" style="transition-delay:0.1s">
+        <div class="module-card">
+          <div class="module-num">01</div>
+          <div class="module-hours">3 Hours</div>
+          <div class="module-title">Foundations of the Rooted Leader</div>
+          <div class="module-desc">
+            Establish the philosophical and relational ground from which every facilitator works. 
+            Before learning how to lead, trainees explore who they are as leaders.
+          </div>
+        </div>
+        <div class="module-card">
+          <div class="module-num">02</div>
+          <div class="module-hours">7 Hours</div>
+          <div class="module-title">The COSC Experience — From the Inside</div>
+          <div class="module-desc">
+            Move through the full COSC Stress Continuum as a participant first — every zone, 
+            every breath practice — before being asked to lead them.
+          </div>
+        </div>
+        <div class="module-card">
+          <div class="module-num">03</div>
+          <div class="module-hours">7 Hours</div>
+          <div class="module-title">The Anatomy Focus — From the Inside</div>
+          <div class="module-desc">
+            Build embodied understanding of the body systems underpinning The Quiet Breath 
+            before stepping into the facilitator seat.
+          </div>
+        </div>
+        <div class="module-card">
+          <div class="module-num">04</div>
+          <div class="module-hours">5 Hours</div>
+          <div class="module-title">Adolescent Development</div>
+          <div class="module-desc">
+            Understand how the adolescent brain and nervous system actually work — as a 
+            practical lens that makes facilitators more patient and more effective.
+          </div>
+        </div>
+        <div class="module-card">
+          <div class="module-num">05</div>
+          <div class="module-hours">8 Hours</div>
+          <div class="module-title">Trauma-Informed Facilitation</div>
+          <div class="module-desc">
+            Develop a trauma-informed lens that shapes every choice — from how you open a 
+            session to how you respond when something unexpected surfaces.
+          </div>
+        </div>
+        <div class="module-card">
+          <div class="module-num">06</div>
+          <div class="module-hours">8 Hours</div>
+          <div class="module-title">Facilitation Skills & Group Dynamics</div>
+          <div class="module-desc">
+            Build the practical skills of holding a group — the art of reading a room, 
+            holding a thread, and adapting in real time.
+          </div>
+        </div>
+        <div class="module-card">
+          <div class="module-num">07</div>
+          <div class="module-hours">6 Hours</div>
+          <div class="module-title">Delivering the Curriculum</div>
+          <div class="module-desc">
+            Walk through the full program from the facilitator's seat — session by session, 
+            decision by decision, with room for community-specific adaptation.
+          </div>
+        </div>
+        <div class="module-card">
+          <div class="module-num">08</div>
+          <div class="module-hours">6 Hours</div>
+          <div class="module-title">Practicum & Certification</div>
+          <div class="module-desc">
+            A supported final practice with real feedback and a clear pathway to certification — 
+            not a performance, but the beginning of your practice.
+          </div>
+        </div>
+      </div>
+      <div class="modules-total reveal">
+        <small>Total Program Hours</small>
+        <span>50 Hours</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO -->
+  <section class="who-section">
+    <div class="section-inner">
+      <div class="reveal">
+        <p class="section-label" style="color:rgba(107,143,113,0.8)">Who This Is For</p>
+        <h2 class="section-title">Called to work<br><em>with young people</em></h2>
+        <div class="divider" style="background:rgba(107,143,113,0.5)"></div>
+      </div>
+      <div class="who-list reveal">
+        <div class="who-item">
+          <div class="who-item-title">Youth Workers & Educators</div>
+          <div class="who-item-body">
+            People already in relationship with young people who want to add embodied, 
+            regulation-focused tools to their existing practice.
+          </div>
+        </div>
+        <div class="who-item">
+          <div class="who-item-title">Community Organizers & Faith Leaders</div>
+          <div class="who-item-body">
+            Those serving youth in faith-based, community, and non-profit settings 
+            where relational safety and holistic wellbeing are central.
+          </div>
+        </div>
+        <div class="who-item">
+          <div class="who-item-title">Coaches & Helping Professionals</div>
+          <div class="who-item-body">
+            Coaches, mentors, and practitioners who want a structured, trauma-informed 
+            framework for working with adolescents in groups.
+          </div>
+        </div>
+      </div>
+      <p class="who-note reveal">
+        No yoga background required. No clinical training required. What is required is 
+        a regulated nervous system, a non-shaming posture toward young people, and a genuine 
+        commitment to the inner work this role asks of you.
+      </p>
+    </div>
+  </section>
+
+  <!-- ENROL -->
+  <section class="enrol-section">
+    <div class="section-inner">
+      <div class="reveal">
+        <p class="section-label">Next Steps</p>
+        <h2 class="section-title">Ready to become a<br><em>Rooted Leader?</em></h2>
+        <p class="section-body">
+          Certification is the beginning of an ongoing practice — and of membership in 
+          a growing community of facilitators bringing this work into their communities.
+        </p>
+        <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+          <a href="/#connect" class="btn btn-forest">Connect with Heather</a>
+          <a href="/#mentoring" class="btn btn-forest">Explore The Mentoring</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-brand">Yoga to Go</span>
+    <span>Mentoring the Whole Leader · <a href="mailto:heather.yogatogo@gmail.com">heather.yogatogo@gmail.com</a></span>
+    <span>Heather Greaves, Yoga Therapist · © 2026</span>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
