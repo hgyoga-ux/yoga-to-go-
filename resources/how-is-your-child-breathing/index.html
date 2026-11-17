@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="How Is Your Child Breathing? A one-minute interactive guide for parents and caregivers on nasal breathing, sleep, and when to seek support. Educational only, not a diagnosis.">
+<meta name="description" content="How Is Your Child Breathing? An interactive guide of about one minute for parents and caregivers on nasal breathing, sleep, and when to seek support. Educational only, not a diagnosis.">
 <title>How Is Your Child Breathing? | Yoga to Go</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -148,6 +148,8 @@ p.body{
 .ex-dot:hover{background:var(--cream2);}
 .ex-dot.is-current{background:var(--navy);color:var(--cream);border-color:var(--navy);}
 
+.ex-runtime{font-size:1rem;font-style:italic;font-weight:600;color:var(--muted);line-height:1.4;}
+
 /* small screens: keep buttons on fewer rows and keep the player controls in reach */
 @media(max-width:700px){
   .ex-hbtn{padding:0.5rem 0.65rem;letter-spacing:0.08em;}
@@ -279,7 +281,7 @@ footer{
   <h1 class="section-h2">How Is Your Child Breathing?</h1>
   <p class="section-sub">A Parent&rsquo;s Guide to Nasal Breathing, Sleep, and When to Seek Support</p>
   <div class="amber-rule"></div>
-  <p class="body">A one-minute interactive explainer for parents and caregivers.</p>
+  <p class="body">An interactive explainer for parents and caregivers: about one minute without voiceover, and longer with it.</p>
 </header>
 
 <!-- EXPLAINER -->
@@ -322,6 +324,7 @@ footer{
         </div>
         <span id="durationLabel" class="ex-time ex-time-end">1:00</span>
       </div>
+      <p class="ex-runtime">About one minute without voiceover. With voiceover on, each scene waits for its narration to finish, so it takes longer.</p>
       <div class="ex-row">
         <div class="ex-btns">
           <button id="prevBtn" type="button" class="ex-btn"><span aria-hidden="true">◀</span> Prev</button>
@@ -565,20 +568,57 @@ footer{
     return `${m}:${s.toString().padStart(2, '0')}`;
   }
 
+  // Voiceover timing: while voiceover is on, a scene waits for its narration to
+  // finish before the player moves on. Each spoken line gets a token so that a
+  // line we cancelled (pause, next, previous, seek, voiceover off) can never
+  // release the wait for a newer one.
+  let speechToken = 0;
+  let speechPending = false;   // the current scene's narration is still being spoken
+  let speechStarted = false;   // the browser reported that speech began
+  let speechStartBy = 0;       // give up waiting if speech has not begun by this time
+  let speechDeadline = 0;      // never wait longer than this, whatever the browser reports
+
   function speakScene(text) {
+    speechPending = false;
     if (!voiceEnabled || !('speechSynthesis' in window)) return;
     try {
       window.speechSynthesis.cancel();
+      const token = ++speechToken;
       const utter = new SpeechSynthesisUtterance(text);
       utter.rate = 0.96;
+      const finish = () => { if (token === speechToken) speechPending = false; };
+      utter.onstart = () => { if (token === speechToken) speechStarted = true; };
+      utter.onend = finish;
+      utter.onerror = finish;
+      const words = text.split(/\s+/).length;
+      speechStarted = false;
+      speechPending = true;
+      speechStartBy = Date.now() + 3000;
+      speechDeadline = Date.now() + (words * 0.8 + 4) * 1000;
       window.speechSynthesis.speak(utter);
-    } catch (e) {}
+    } catch (e) {
+      speechPending = false;
+    }
   }
 
   function stopSpeech() {
+    speechToken++;
+    speechPending = false;
     if ('speechSynthesis' in window) {
       try { window.speechSynthesis.cancel(); } catch (e) {}
     }
+  }
+
+  // True while we should hold the scene so the narration can finish.
+  function waitingForSpeech() {
+    if (!voiceEnabled || !speechPending) return false;
+    const now = Date.now();
+    // Safety nets: a browser with no working voice, or one that never reports the end.
+    if ((!speechStarted && now > speechStartBy) || now > speechDeadline) {
+      speechPending = false;
+      return false;
+    }
+    return true;
   }
 
   function getElapsedTotal() {
@@ -643,6 +683,12 @@ footer{
       timerId = setInterval(() => {
         elapsedInScene += 0.25;
         if (elapsedInScene >= scenes[currentIdx].durationSec) {
+          if (waitingForSpeech()) {
+            // Scene time is up but the narration is still going: hold here.
+            elapsedInScene = scenes[currentIdx].durationSec;
+            updateProgressUI();
+            return;
+          }
           if (currentIdx < scenes.length - 1) {
             goToScene(currentIdx + 1, false);
           } else {
