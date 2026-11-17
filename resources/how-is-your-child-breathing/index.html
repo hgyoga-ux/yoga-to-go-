@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="How Is Your Child Breathing? A one-minute interactive guide for parents and caregivers on nasal breathing, sleep, and when to seek support. Educational only, not a diagnosis.">
+<title>How Is Your Child Breathing? | Yoga to Go</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+
+:root{
+  --navy:#0D1F3C;
+  --amber:#E08840;
+  --ember:#C96A2B;
+  --cream:#F5F0E8;
+  --cream2:#EDE7DA;
+  --pad:clamp(1.5rem,6vw,5rem);
+  --accent-text:#9A4A14;   /* darker ember for small text on light backgrounds (AA contrast) */
+  --muted:#3F4D66;
+}
+
+html{scroll-behavior:smooth;}
+body{background:var(--cream);color:var(--navy);font-family:'Cormorant Garamond',Georgia,serif;overflow-x:hidden;}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto;}}
+
+/* ── NAV (same as homepage) ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:var(--navy);
+  height:56px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 var(--pad);
+  border-bottom:3px solid var(--amber);
+}
+.nav-brand{
+  font-family:'Cinzel',serif;font-size:0.82rem;font-weight:600;
+  letter-spacing:0.16em;color:var(--cream);text-transform:uppercase;
+  text-decoration:none;
+}
+.nav-links{display:flex;gap:clamp(1rem,2.5vw,2rem);list-style:none;}
+.nav-links a{
+  font-family:'Cinzel',serif;font-size:0.62rem;font-weight:400;
+  letter-spacing:0.1em;color:rgba(245,240,232,0.75);
+  text-decoration:none;text-transform:uppercase;transition:color 0.2s;
+}
+.nav-links a:hover{color:var(--amber);}
+@media(max-width:600px){.nav-links{display:none;}}
+
+/* ── SHARED SECTION STYLES (same as homepage) ── */
+section{padding:clamp(3.5rem,7vw,6rem) var(--pad);}
+
+.section-eyebrow{
+  font-family:'Cinzel',serif;font-size:0.68rem;font-weight:600;
+  letter-spacing:0.22em;color:var(--amber);text-transform:uppercase;
+  display:flex;align-items:center;gap:0.8rem;margin-bottom:1rem;
+}
+.section-eyebrow::before{content:'';display:block;width:36px;height:2px;background:var(--amber);}
+.section-h2{
+  font-family:'Cinzel',serif;
+  font-size:clamp(1.5rem,3.5vw,2.4rem);
+  font-weight:600;color:var(--navy);margin-bottom:0.5rem;line-height:1.2;
+}
+.section-sub{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1rem,2vw,1.2rem);
+  font-weight:600;font-style:italic;color:var(--ember);margin-bottom:1.8rem;
+}
+.amber-rule{width:52px;height:3px;background:var(--amber);margin-bottom:1.8rem;}
+p.body{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1rem,1.8vw,1.15rem);
+  font-weight:400;color:var(--navy);line-height:1.85;
+  margin-bottom:1.1rem;max-width:680px;
+}
+
+/* ── PAGE INTRO — navy bg, like About ── */
+.page-intro{background:var(--navy);margin-top:56px;padding:clamp(3rem,6vw,5rem) var(--pad) clamp(2.5rem,5vw,4rem);}
+.page-intro .section-h2{color:var(--cream);}
+.page-intro .section-sub{color:var(--amber);margin-bottom:1.2rem;}
+.page-intro .amber-rule{margin-bottom:1.2rem;}
+.page-intro p.body{color:rgba(245,240,232,0.88);margin-bottom:0;}
+
+/* ── EXPLAINER (scoped to .ex — nothing here touches other pages) ── */
+.ex-section{background:var(--cream);padding:clamp(2rem,5vw,4rem) clamp(0.75rem,4vw,var(--pad)) clamp(3rem,6vw,5rem);}
+.ex{
+  max-width:960px;margin:0 auto;background:#fff;color:var(--navy);
+  border:1px solid rgba(13,31,60,0.16);border-top:4px solid var(--amber);
+}
+:where(.ex) button{font:inherit;color:inherit;}
+.ex :focus-visible{outline:3px solid var(--ember);outline-offset:2px;}
+.ex-head :focus-visible{outline-color:var(--cream);}
+.ex-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
+
+/* header bar */
+.ex-head{
+  background:var(--navy);color:var(--cream);padding:0.9rem 1.2rem;
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:0.8rem;
+}
+.ex-kicker{font-family:'Cinzel',serif;font-size:0.62rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--amber);}
+.ex-title{font-family:'Cinzel',serif;font-size:1rem;font-weight:600;letter-spacing:0.06em;line-height:1.3;margin-top:0.15rem;}
+.ex-head-actions{display:flex;gap:0.5rem;flex-wrap:wrap;}
+.ex-hbtn{
+  font-family:'Cinzel',serif;font-size:0.62rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--cream);background:transparent;border:1px solid rgba(245,240,232,0.5);
+  padding:0.55rem 0.9rem;min-height:40px;cursor:pointer;
+  display:inline-flex;align-items:center;gap:0.4rem;transition:background 0.2s;
+}
+.ex-hbtn:hover:not(:disabled){background:rgba(245,240,232,0.14);}
+.ex-hbtn:disabled{opacity:0.65;cursor:not-allowed;}
+
+/* stage */
+.ex-stagewrap{background:var(--cream2);padding:1.2rem clamp(1rem,3vw,2rem) 1.4rem;display:flex;flex-direction:column;min-height:26rem;}
+.ex-meta{display:flex;flex-wrap:wrap;gap:0.5rem 1rem;align-items:center;justify-content:space-between;margin-bottom:0.8rem;}
+.ex-badge{font-family:'Cinzel',serif;font-size:0.62rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--navy);background:rgba(224,136,64,0.25);padding:0.4rem 0.75rem;}
+.ex-note{font-size:1.02rem;font-style:italic;font-weight:600;color:var(--muted);}
+.ex-stage{flex:1;display:flex;align-items:center;justify-content:center;margin:0.5rem 0;}
+.ex-caption{margin-top:1rem;background:#fff;border:1px solid rgba(13,31,60,0.16);padding:0.9rem 1.1rem;}
+.ex-caption p{font-size:clamp(1.05rem,2vw,1.25rem);font-weight:600;line-height:1.55;text-align:center;}
+
+/* controls */
+.ex-controls{background:var(--cream);border-top:1px solid rgba(13,31,60,0.16);padding:0.9rem clamp(1rem,3vw,1.5rem);display:flex;flex-direction:column;gap:0.8rem;}
+.ex-progress{display:flex;align-items:center;gap:0.75rem;}
+.ex-time{font-family:'Cinzel',serif;font-size:0.72rem;color:var(--muted);width:2.6rem;flex:none;font-variant-numeric:tabular-nums;}
+.ex-time-end{text-align:right;}
+.ex-track{position:relative;flex:1;height:28px;cursor:pointer;display:flex;align-items:center;}
+.ex-track::before{content:'';position:absolute;left:0;right:0;top:50%;height:8px;margin-top:-4px;background:var(--cream2);border:1px solid rgba(13,31,60,0.25);}
+.ex-bar{position:relative;height:8px;background:var(--navy);border-right:3px solid var(--amber);width:0;transition:width 0.2s;}
+.ex-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:0.8rem;}
+.ex-btns{display:flex;gap:0.5rem;flex-wrap:wrap;}
+.ex-btn{
+  font-family:'Cinzel',serif;font-size:0.66rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;
+  background:#fff;color:var(--navy);border:1px solid rgba(13,31,60,0.45);
+  padding:0.6rem 1rem;min-height:44px;cursor:pointer;
+  display:inline-flex;align-items:center;justify-content:center;gap:0.4rem;transition:background 0.2s,color 0.2s;
+}
+.ex-btn:hover{background:var(--cream2);}
+.ex-btn-primary{background:var(--navy);color:var(--cream);border-color:var(--navy);min-width:7.5rem;}
+.ex-btn-primary:hover{background:var(--amber);color:var(--navy);border-color:var(--amber);}
+.ex-dots{display:flex;gap:0.4rem;flex-wrap:wrap;}
+.ex-dot{
+  width:40px;height:40px;border-radius:50%;cursor:pointer;
+  font-family:'Cinzel',serif;font-size:0.72rem;font-weight:600;
+  background:#fff;color:var(--navy);border:1px solid rgba(13,31,60,0.45);transition:background 0.2s;
+}
+.ex-dot:hover{background:var(--cream2);}
+.ex-dot.is-current{background:var(--navy);color:var(--cream);border-color:var(--navy);}
+
+/* small screens: keep buttons on fewer rows and keep the player controls in reach */
+@media(max-width:700px){
+  .ex-hbtn{padding:0.5rem 0.65rem;letter-spacing:0.08em;}
+  .ex-btn{padding:0.6rem 0.7rem;letter-spacing:0.08em;}
+  .ex-btn-primary{min-width:6rem;}
+  .ex-controls{position:sticky;bottom:0;z-index:5;box-shadow:0 -4px 12px rgba(13,31,60,0.12);}
+}
+
+/* transcript */
+.ex-transcript{border-top:1px solid rgba(13,31,60,0.16);background:#fff;padding:1.1rem 1.2rem;max-height:18rem;overflow-y:auto;}
+.ex-transcript[hidden]{display:none;}
+.ex-tr-head{display:flex;justify-content:space-between;align-items:center;gap:0.8rem;flex-wrap:wrap;margin-bottom:0.8rem;}
+.ex-tr-head h2{font-family:'Cinzel',serif;font-size:0.78rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;}
+.ex-copy{font-family:'Cinzel',serif;font-size:0.6rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;background:var(--cream2);border:1px solid rgba(13,31,60,0.3);padding:0.5rem 0.8rem;min-height:36px;cursor:pointer;}
+.ex-copy:hover{background:var(--cream);}
+.ex-tr-item{background:var(--cream);border:1px solid rgba(13,31,60,0.12);padding:0.7rem 0.9rem;margin-bottom:0.6rem;font-size:1.05rem;line-height:1.55;}
+.ex-tr-item strong{display:block;font-family:'Cinzel',serif;font-size:0.64rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent-text);margin-bottom:0.3rem;}
+
+.ex-noscript{padding:1.5rem;font-size:1.1rem;line-height:1.6;}
+
+/* scenes */
+.ex-scene{width:100%;margin:0 auto;max-width:46rem;}
+.ex-center{text-align:center;}
+.ex-enter{animation:exFade 0.45s ease-out forwards;}
+.ex-float{animation:exFloat 4s ease-in-out infinite;}
+.ex-flow{stroke-dasharray:8 6;animation:exFlow 1.4s linear infinite;}
+@keyframes exFade{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
+@keyframes exFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-6px);}}
+@keyframes exFlow{to{stroke-dashoffset:-40;}}
+@media(prefers-reduced-motion:reduce){
+  .ex *,.ex *::before,.ex *::after{animation:none !important;transition:none !important;}
+}
+
+.ex-h2{font-family:'Cinzel',serif;font-weight:600;color:var(--navy);line-height:1.25;letter-spacing:0.04em;}
+.ex-h2-lg{font-size:clamp(1.4rem,4vw,2.1rem);margin-bottom:0.7rem;}
+.ex-h2-md{font-size:clamp(1.15rem,3vw,1.5rem);margin-bottom:1rem;}
+.ex-h2-center{text-align:center;}
+.ex-lede{font-size:clamp(1.15rem,2.4vw,1.4rem);font-style:italic;font-weight:600;color:var(--accent-text);margin-bottom:1.2rem;}
+.ex-sub{text-align:center;font-size:1.15rem;font-style:italic;font-weight:600;color:var(--accent-text);margin:-0.4rem 0 1.2rem;}
+.ex-icon{display:inline-flex;align-items:center;justify-content:center;width:5rem;height:5rem;border-radius:50%;background:rgba(224,136,64,0.22);font-size:2.2rem;margin-bottom:1rem;}
+
+.ex-grid{display:grid;gap:1rem;grid-template-columns:1fr;}
+.ex-grid-2{grid-template-columns:1fr;}
+.ex-grid-4{grid-template-columns:repeat(2,1fr);gap:0.7rem;}
+@media(min-width:700px){
+  .ex-grid-2{grid-template-columns:1fr 1fr;}
+  .ex-grid-4{grid-template-columns:repeat(4,1fr);gap:0.8rem;}
+  .ex-split{grid-template-columns:1fr 1fr;align-items:center;gap:1.5rem;}
+}
+.ex-card{background:#fff;border:1px solid rgba(13,31,60,0.14);padding:1rem 1.1rem;}
+.ex-card-amber{border-top:4px solid var(--amber);}
+.ex-card-navy{border-top:4px solid var(--navy);}
+.ex-card-dark{background:var(--navy);color:var(--cream);border-color:var(--navy);display:flex;flex-direction:column;justify-content:space-between;}
+.ex-chip{background:#fff;border:1px solid rgba(13,31,60,0.14);border-top:3px solid var(--amber);padding:0.75rem 0.5rem;font-family:'Cinzel',serif;font-size:0.72rem;font-weight:600;letter-spacing:0.05em;line-height:1.35;text-align:center;}
+.ex-label{font-family:'Cinzel',serif;font-size:0.62rem;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent-text);margin-bottom:0.6rem;}
+.ex-card-dark .ex-label{color:var(--amber);}
+.ex-card h3{font-family:'Cinzel',serif;font-size:0.92rem;font-weight:600;letter-spacing:0.05em;}
+.ex-card-head{display:flex;align-items:center;gap:0.5rem;margin-bottom:0.7rem;}
+.ex-list{padding-left:1.1rem;font-size:1.08rem;line-height:1.5;}
+.ex-list li{margin-bottom:0.3rem;}
+.ex-list-plain{list-style:none;padding-left:0;}
+.ex-list-plain li{margin-bottom:0.6rem;}
+.ex-card p{font-size:1.08rem;line-height:1.55;}
+.ex-card-dark p{margin-bottom:0.7rem;}
+.ex-fine{margin-top:0.9rem;padding-top:0.7rem;border-top:1px solid rgba(245,240,232,0.25);font-size:0.98rem;font-style:italic;color:rgba(245,240,232,0.9);}
+.ex-below{text-align:center;font-size:1.02rem;line-height:1.5;margin-top:0.9rem;color:var(--muted);}
+.ex-below strong{color:var(--navy);}
+
+.ex-svgcard{background:#fff;border:1px solid rgba(13,31,60,0.14);padding:1rem;display:flex;justify-content:center;}
+.ex-svgcard svg{width:100%;max-width:230px;height:auto;}
+.ex-svgcard text{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:12.5px;}
+.ex-stack{display:flex;flex-direction:column;gap:0.7rem;}
+.ex-feature{background:#fff;border:1px solid rgba(13,31,60,0.14);padding:0.7rem 0.9rem;display:flex;align-items:center;gap:0.8rem;}
+.ex-feature-icon{font-size:1.6rem;}
+.ex-feature-t{font-weight:600;font-size:1.12rem;line-height:1.25;}
+.ex-feature-d{font-size:1rem;line-height:1.35;color:var(--muted);}
+
+.ex-step{text-align:center;padding:0.9rem 0.6rem;}
+.ex-num{width:2.5rem;height:2.5rem;margin:0 auto 0.5rem;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-weight:600;background:var(--amber);color:var(--navy);}
+.ex-num-navy{background:var(--navy);color:var(--cream);}
+.ex-step-t{font-family:'Cinzel',serif;font-size:0.85rem;font-weight:600;letter-spacing:0.05em;margin-bottom:0.3rem;}
+.ex-step p{font-size:1rem;line-height:1.4;color:var(--muted);}
+
+.ex-pill{display:inline-block;background:rgba(224,136,64,0.25);color:var(--navy);font-family:'Cinzel',serif;font-size:0.62rem;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;padding:0.4rem 0.9rem;margin-bottom:0.8rem;}
+.ex-quote{font-family:'Cinzel',serif;font-size:clamp(1.15rem,3.2vw,1.7rem);font-weight:600;line-height:1.4;color:var(--navy);margin-bottom:0.8rem;}
+.ex-para{font-size:1.1rem;line-height:1.55;color:var(--muted);margin-bottom:1.1rem;}
+.ex-tags{display:flex;flex-wrap:wrap;justify-content:center;gap:0.5rem;}
+.ex-tag{background:#fff;border:1px solid rgba(13,31,60,0.2);padding:0.45rem 0.9rem;font-weight:600;font-size:1.02rem;}
+.ex-credit{margin-top:1rem;font-size:0.98rem;color:var(--muted);}
+.ex-learn{margin-top:0.9rem;padding-top:0.8rem;border-top:1px solid rgba(13,31,60,0.2);text-align:left;font-size:1.05rem;line-height:1.5;}
+.ex-learn p{margin-bottom:0.3rem;}
+.ex-learn a{color:var(--navy);text-decoration:underline;text-underline-offset:2px;}
+.ex-learn a:hover{color:var(--accent-text);}
+
+/* ── FOOTER (same as homepage) ── */
+footer{
+  background:var(--navy);border-top:4px solid var(--amber);
+  padding:1.3rem var(--pad);
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:0.8rem;
+}
+.footer-brand{
+  font-family:'Cinzel',serif;font-size:0.7rem;font-weight:600;
+  letter-spacing:0.12em;color:var(--cream);text-transform:uppercase;
+}
+.footer-right{
+  font-family:'Cormorant Garamond',serif;font-size:0.88rem;
+  color:rgba(245,240,232,0.5);
+}
+.footer-right a{color:inherit;}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-brand" href="/">Yoga to Go</a>
+  <ul class="nav-links">
+    <li><a href="/#about">About</a></li>
+    <li><a href="/#mentoring">The Mentoring</a></li>
+    <li><a href="/#grounded">The Grounded Leader</a></li>
+    <li><a href="/#connect">Connect</a></li>
+  </ul>
+</nav>
+
+<!-- PAGE INTRO -->
+<header class="page-intro">
+  <div class="section-eyebrow">Resources &middot; Breathe to Focus</div>
+  <h1 class="section-h2">How Is Your Child Breathing?</h1>
+  <p class="section-sub">A Parent&rsquo;s Guide to Nasal Breathing, Sleep, and When to Seek Support</p>
+  <div class="amber-rule"></div>
+  <p class="body">A one-minute interactive explainer for parents and caregivers.</p>
+</header>
+
+<!-- EXPLAINER -->
+<main class="ex-section" id="explainer">
+  <div class="ex" role="region" aria-label="How Is Your Child Breathing? interactive explainer">
+    <noscript><p class="ex-noscript">This interactive explainer needs JavaScript to play. Please turn it on in your browser, or try a different browser.</p></noscript>
+
+    <div class="ex-head">
+      <div>
+        <div class="ex-kicker">Breathe to Focus &middot; Yoga to Go</div>
+        <div class="ex-title">How Is Your Child Breathing?</div>
+      </div>
+      <div class="ex-head-actions">
+        <button id="voiceToggleBtn" type="button" class="ex-hbtn" aria-pressed="false">
+          <span id="voiceIcon" aria-hidden="true">🔇</span>
+          <span id="voiceLabel">Voiceover Off</span>
+        </button>
+        <button id="transcriptToggleBtn" type="button" class="ex-hbtn" aria-controls="transcriptPanel" aria-expanded="false">Script</button>
+      </div>
+    </div>
+
+    <div class="ex-stagewrap">
+      <div class="ex-meta">
+        <span id="sceneBadge" class="ex-badge">Scene 1 of 6</span>
+        <span class="ex-note">Educational guide &mdash; not a diagnosis</span>
+      </div>
+      <div id="sceneStage" class="ex-stage"></div>
+      <div class="ex-caption">
+        <p id="narrationText" aria-live="polite"></p>
+      </div>
+    </div>
+
+    <div class="ex-controls">
+      <div class="ex-progress">
+        <span id="timeLabel" class="ex-time">0:00</span>
+        <div id="progressTrack" class="ex-track" role="slider" tabindex="0"
+             aria-label="Explainer progress. Use arrow keys to move in five-second steps."
+             aria-valuemin="0" aria-valuemax="60" aria-valuenow="0" title="Use arrow keys or click to seek">
+          <div id="progressBar" class="ex-bar"></div>
+        </div>
+        <span id="durationLabel" class="ex-time ex-time-end">1:00</span>
+      </div>
+      <div class="ex-row">
+        <div class="ex-btns">
+          <button id="prevBtn" type="button" class="ex-btn"><span aria-hidden="true">◀</span> Prev</button>
+          <button id="playPauseBtn" type="button" class="ex-btn ex-btn-primary">
+            <span id="playIcon" aria-hidden="true">▶</span>
+            <span id="playLabel">Play</span>
+          </button>
+          <button id="nextBtn" type="button" class="ex-btn">Next <span aria-hidden="true">▶</span></button>
+        </div>
+        <div id="sceneDots" class="ex-dots" role="group" aria-label="Scenes"></div>
+      </div>
+    </div>
+
+    <section id="transcriptPanel" class="ex-transcript" hidden tabindex="0" aria-labelledby="transcriptHeading">
+      <div class="ex-tr-head">
+        <h2 id="transcriptHeading">Full Explainer Script</h2>
+        <button id="copyScriptBtn" type="button" class="ex-copy">Copy Script</button>
+      </div>
+      <div id="transcriptList"></div>
+    </section>
+    <span id="copyStatus" class="ex-sr" role="status"></span>
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-brand">Yoga to Go &middot; yogatogo.com</span>
+  <span class="footer-right">Brantford, Ontario &nbsp;&middot;&nbsp; &copy; 2025 Yoga to Go</span>
+</footer>
+
+<script>
+(function () {
+  const scenes = [
+    {
+      title: "Why Notice Breathing?",
+      durationSec: 9,
+      narration: "Children breathe thousands of times a day without anyone thinking about it. The nose is the body's normal, preferred way to breathe at rest. This guide helps you notice, understand, ask questions, and seek guidance when needed.",
+      render: () => `
+        <div class="ex-scene ex-center ex-enter">
+          <div class="ex-icon ex-float" aria-hidden="true">🌱</div>
+          <h2 class="ex-h2 ex-h2-lg">How Is Your Child Breathing?</h2>
+          <p class="ex-lede">A Parent’s Guide to Nasal Breathing, Sleep, and When to Seek Support</p>
+          <div class="ex-grid ex-grid-4">
+            <div class="ex-chip">1. Notice</div>
+            <div class="ex-chip">2. Understand</div>
+            <div class="ex-chip">3. Ask Questions</div>
+            <div class="ex-chip">4. Seek Guidance</div>
+          </div>
+        </div>
+      `
+    },
+    {
+      title: "What the Nose Does",
+      durationSec: 10,
+      narration: "As air enters through the nostril and travels through the nasal cavity into the throat, the nose filters, warms, and moistens it—giving air a clear path while helping defend against airborne particles.",
+      render: () => `
+        <div class="ex-scene ex-enter ex-grid ex-split">
+          <div class="ex-svgcard">
+            <svg viewBox="0 0 260 220" role="img" aria-label="Illustration of airflow through the nasal cavity">
+              <path d="M90,30 C145,25 195,60 195,120 C195,165 170,195 145,205 L95,205 L95,180 C78,180 70,172 72,160 L66,154 C60,148 63,140 70,136 L52,115 C46,108 55,95 68,85 C70,55 75,32 90,30 Z" fill="#F2EFE9" stroke="#0D1F3C" stroke-width="2.5"/>
+              <path d="M62,112 C85,95 128,92 145,112 C152,122 152,155 150,205" fill="none" stroke="#E08840" stroke-width="10" stroke-linecap="round" opacity="0.28"/>
+              <path d="M35,116 L62,114 C90,96 132,96 146,118 L148,192" fill="none" stroke="#C96A2B" stroke-width="3.5" stroke-linecap="round" class="ex-flow"/>
+              <polygon points="148,200 142,188 154,188" fill="#C96A2B"/>
+              <text x="12" y="108" fill="#0D1F3C">Air in</text>
+              <text x="92" y="82" fill="#9A4A14" font-weight="700">Nasal cavity</text>
+              <text x="140" y="185" text-anchor="end" fill="#0D1F3C">Throat</text>
+            </svg>
+          </div>
+          <div class="ex-stack">
+            <h2 class="ex-h2" style="font-size:clamp(1.15rem,3vw,1.5rem)">What the Nose Does</h2>
+            <div class="ex-feature">
+              <span class="ex-feature-icon" aria-hidden="true">🛡️</span>
+              <div><div class="ex-feature-t">Filters the air</div><div class="ex-feature-d">Helps trap particles (alongside hygiene &amp; ventilation)</div></div>
+            </div>
+            <div class="ex-feature">
+              <span class="ex-feature-icon" aria-hidden="true">🌡️</span>
+              <div><div class="ex-feature-t">Warms &amp; moistens</div><div class="ex-feature-d">Prepares incoming air before it reaches the lungs</div></div>
+            </div>
+            <div class="ex-feature">
+              <span class="ex-feature-icon" aria-hidden="true">💨</span>
+              <div><div class="ex-feature-t">Clear pathway</div><div class="ex-feature-d">Do not force a child's mouth closed—ask why nasal breathing is hard</div></div>
+            </div>
+          </div>
+        </div>
+      `
+    },
+    {
+      title: "One Connected System",
+      durationSec: 10,
+      narration: "The palate forms the roof of the mouth and the floor of the nasal passage above it. Tongue, teeth, jaws, palate, and nose work together as one connected system as a child grows.",
+      render: () => `
+        <div class="ex-scene ex-enter">
+          <h2 class="ex-h2 ex-h2-md ex-h2-center">The Mouth, Nose, Tongue &amp; Palate</h2>
+          <div class="ex-grid ex-grid-2">
+            <div class="ex-card ex-card-amber">
+              <div class="ex-label">Connected Anatomy</div>
+              <ul class="ex-list ex-list-plain">
+                <li><strong>Hard &amp; Soft Palate:</strong> Separates the mouth from the nasal cavity above.</li>
+                <li><strong>Tongue &amp; Jaws:</strong> Sit together inside the oral space.</li>
+                <li><strong>Teeth &amp; Face:</strong> Long-term mouth breathing sometimes accompanies a narrower upper jaw, higher palate, or crowded teeth.</li>
+              </ul>
+            </div>
+            <div class="ex-card ex-card-dark">
+              <div>
+                <div class="ex-label">Try With Your Child</div>
+                <p><strong>Explore Your Palate:</strong> Gently touch the roof of your mouth with your tongue. That's your palate!</p>
+                <p><strong>Notice Your Breath:</strong> Sit quietly and notice where air enters and leaves—simple body awareness, not a treatment.</p>
+              </div>
+              <div class="ex-fine">Associations don't prove single-cause—genetics, blockages &amp; growth all play a role.</div>
+            </div>
+          </div>
+        </div>
+      `
+    },
+    {
+      title: "What to Notice: Day & Sleep",
+      durationSec: 11,
+      narration: "Notice changes that recur over time. Any recurring snoring, pauses or gasps, or laboured breathing during sleep is worth discussing with your child’s healthcare professional; don’t wait for several signs to appear. Other daytime or sleep changes can help build the picture.",
+      render: () => `
+        <div class="ex-scene ex-enter">
+          <h2 class="ex-h2 ex-h2-md ex-h2-center">Patterns Worth Noticing</h2>
+          <div class="ex-grid ex-grid-2">
+            <div class="ex-card ex-card-amber">
+              <div class="ex-card-head"><span aria-hidden="true">☀️</span><h3>During the Day</h3></div>
+              <ul class="ex-list">
+                <li>Mouth regularly open at rest</li>
+                <li>Frequent nasal congestion</li>
+                <li>Difficulty chewing or swallowing</li>
+                <li>Speech that seems effortful</li>
+                <li>Dental crowding or bad breath</li>
+                <li>Daytime tiredness or attention trouble</li>
+              </ul>
+            </div>
+            <div class="ex-card ex-card-navy">
+              <div class="ex-card-head"><span aria-hidden="true">🌙</span><h3>During Sleep</h3></div>
+              <ul class="ex-list">
+                <li>Snoring most nights</li>
+                <li>Breathing through the mouth asleep</li>
+                <li>Noisy or laboured breathing</li>
+                <li>Pauses, snorts, or gasps</li>
+                <li>Restless sleep or unusual positions</li>
+                <li>Morning headaches or bedwetting</li>
+              </ul>
+            </div>
+          </div>
+          <p class="ex-below"><strong>Don’t wait for several signs:</strong> recurring snoring, pauses or gasps, or laboured breathing during sleep are reasons to speak with your child’s healthcare professional. Other recurring changes are useful to record, too.</p>
+        </div>
+      `
+    },
+    {
+      title: "4 Steps for Caregivers",
+      durationSec: 10,
+      narration: "Instead of 'Why won't you?', ask 'Is there a reason this is difficult?' Follow four simple steps: Observe during quiet moments, Listen during sleep, Record repeating patterns, and Ask a qualified professional.",
+      render: () => `
+        <div class="ex-scene ex-enter">
+          <h2 class="ex-h2 ex-h2-md ex-h2-center" style="margin-bottom:0.4rem">4 Steps for Caregivers</h2>
+          <p class="ex-sub">Do not assume inability is unwillingness.</p>
+          <div class="ex-grid ex-grid-4">
+            <div class="ex-card ex-step">
+              <div class="ex-num">1</div>
+              <div class="ex-step-t">Observe</div>
+              <p>Notice breathing during reading, play &amp; sleep.</p>
+            </div>
+            <div class="ex-card ex-step">
+              <div class="ex-num">2</div>
+              <div class="ex-step-t">Listen</div>
+              <p>Notice snoring, noisy breathing, or gasps.</p>
+            </div>
+            <div class="ex-card ex-step">
+              <div class="ex-num">3</div>
+              <div class="ex-step-t">Record</div>
+              <p>Jot down what happens, when &amp; how often.</p>
+            </div>
+            <div class="ex-card ex-step">
+              <div class="ex-num ex-num-navy">4</div>
+              <div class="ex-step-t">Ask</div>
+              <p>Share notes with your child’s healthcare professional; ask whether dental, ENT, or sleep assessment is appropriate.</p>
+            </div>
+          </div>
+        </div>
+      `
+    },
+    {
+      title: "Plant. Water. Flourish.",
+      durationSec: 10,
+      narration: "Awareness is shared by parents, teachers, family members, dentists, and healthcare professionals. Celebrate what is different, and investigate what is difficult—Plant, Water, Flourish. This explainer offers general information; it cannot diagnose a breathing or sleep problem.",
+      render: () => `
+        <div class="ex-scene ex-center ex-enter">
+          <div class="ex-pill">Awareness Is a Shared Responsibility</div>
+          <h2 class="ex-quote">“Celebrate what is different.<br>Investigate what is difficult.”</h2>
+          <p class="ex-para">Parents, teachers, extended family, dentists, and healthcare professionals each see a different piece of a child's life. Sharing observations builds a fuller picture.</p>
+          <div class="ex-tags">
+            <span class="ex-tag"><span aria-hidden="true">🌱</span> Plant: Build awareness</span>
+            <span class="ex-tag"><span aria-hidden="true">💧</span> Water: Observe without blame</span>
+            <span class="ex-tag"><span aria-hidden="true">🌿</span> Flourish: Support growth</span>
+          </div>
+          <div class="ex-credit">Breathe to Focus | Yoga to Go · freetoflourish.ca · yogatogo.com</div>
+          <div class="ex-learn">
+            <p><strong>Learn more:</strong></p>
+            <p><a href="https://caringforkids.cps.ca/handouts/healthy-living/healthy_sleep_for_your_baby_and_your_child" target="_blank" rel="noopener noreferrer">Canadian Paediatric Society: Healthy sleep for your baby and child</a></p>
+            <p><a href="https://www.healthychildren.org/English/ages-stages/baby/sleep/Pages/Sleep-Apnea-Detection.aspx" target="_blank" rel="noopener noreferrer">American Academy of Pediatrics: Sleep apnea in children</a></p>
+          </div>
+        </div>
+      `
+    }
+  ];
+
+  let currentIdx = 0;
+  let isPlaying = false;
+  let voiceEnabled = false;
+  let elapsedInScene = 0;
+  let timerId = null;
+
+  const totalDuration = scenes.reduce((acc, s) => acc + s.durationSec, 0);
+
+  const sceneStage = document.getElementById('sceneStage');
+  const sceneBadge = document.getElementById('sceneBadge');
+  const narrationText = document.getElementById('narrationText');
+  const progressBar = document.getElementById('progressBar');
+  const timeLabel = document.getElementById('timeLabel');
+  const durationLabel = document.getElementById('durationLabel');
+  const playPauseBtn = document.getElementById('playPauseBtn');
+  const playIcon = document.getElementById('playIcon');
+  const playLabel = document.getElementById('playLabel');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const sceneDots = document.getElementById('sceneDots');
+  const voiceToggleBtn = document.getElementById('voiceToggleBtn');
+  const voiceIcon = document.getElementById('voiceIcon');
+  const voiceLabel = document.getElementById('voiceLabel');
+  const transcriptToggleBtn = document.getElementById('transcriptToggleBtn');
+  const transcriptPanel = document.getElementById('transcriptPanel');
+  const transcriptList = document.getElementById('transcriptList');
+  const copyScriptBtn = document.getElementById('copyScriptBtn');
+  const copyStatus = document.getElementById('copyStatus');
+  const progressTrack = document.getElementById('progressTrack');
+
+  function formatTime(sec) {
+    const m = Math.floor(sec / 60);
+    const s = Math.floor(sec % 60);
+    return `${m}:${s.toString().padStart(2, '0')}`;
+  }
+
+  function speakScene(text) {
+    if (!voiceEnabled || !('speechSynthesis' in window)) return;
+    try {
+      window.speechSynthesis.cancel();
+      const utter = new SpeechSynthesisUtterance(text);
+      utter.rate = 0.96;
+      window.speechSynthesis.speak(utter);
+    } catch (e) {}
+  }
+
+  function stopSpeech() {
+    if ('speechSynthesis' in window) {
+      try { window.speechSynthesis.cancel(); } catch (e) {}
+    }
+  }
+
+  function getElapsedTotal() {
+    let sum = 0;
+    for (let i = 0; i < currentIdx; i++) sum += scenes[i].durationSec;
+    return sum + elapsedInScene;
+  }
+
+  function updateProgressUI() {
+    const elapsed = getElapsedTotal();
+    const pct = Math.min(100, (elapsed / totalDuration) * 100);
+    progressBar.style.width = `${pct}%`;
+    progressTrack.setAttribute('aria-valuenow', String(Math.round(elapsed)));
+    progressTrack.setAttribute('aria-valuetext', `${formatTime(elapsed)} of ${formatTime(totalDuration)}`);
+    timeLabel.textContent = formatTime(elapsed);
+    durationLabel.textContent = formatTime(totalDuration);
+  }
+
+  function renderDots() {
+    sceneDots.innerHTML = '';
+    scenes.forEach((s, i) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.textContent = `${i + 1}`;
+      btn.title = s.title;
+      btn.setAttribute('aria-label', `Go to scene ${i + 1}: ${s.title}`);
+      if (i === currentIdx) btn.setAttribute('aria-current', 'step');
+      btn.className = 'ex-dot' + (i === currentIdx ? ' is-current' : '');
+      btn.addEventListener('click', () => goToScene(i, true));
+      sceneDots.appendChild(btn);
+    });
+  }
+
+  function renderScene(triggerVoice = false) {
+    const scene = scenes[currentIdx];
+    sceneBadge.textContent = `Scene ${currentIdx + 1} of ${scenes.length} · ${scene.title}`;
+    sceneStage.innerHTML = scene.render();
+    narrationText.textContent = scene.narration;
+    renderDots();
+    updateProgressUI();
+    if (triggerVoice && voiceEnabled) {
+      speakScene(scene.narration);
+    }
+  }
+
+  function goToScene(idx, fromUser = false) {
+    currentIdx = (idx + scenes.length) % scenes.length;
+    elapsedInScene = 0;
+    renderScene(isPlaying || fromUser);
+  }
+
+  function setPlaying(play) {
+    isPlaying = play;
+    playIcon.textContent = isPlaying ? '⏸' : '▶';
+    playLabel.textContent = isPlaying ? 'Pause' : 'Play';
+    if (timerId) {
+      clearInterval(timerId);
+      timerId = null;
+    }
+    if (isPlaying) {
+      if (voiceEnabled) speakScene(scenes[currentIdx].narration);
+      timerId = setInterval(() => {
+        elapsedInScene += 0.25;
+        if (elapsedInScene >= scenes[currentIdx].durationSec) {
+          if (currentIdx < scenes.length - 1) {
+            goToScene(currentIdx + 1, false);
+          } else {
+            setPlaying(false);
+            elapsedInScene = scenes[currentIdx].durationSec;
+            updateProgressUI();
+          }
+        } else {
+          updateProgressUI();
+        }
+      }, 250);
+    } else {
+      stopSpeech();
+    }
+  }
+
+  playPauseBtn.addEventListener('click', () => {
+    if (!isPlaying && currentIdx === scenes.length - 1 && elapsedInScene >= scenes[currentIdx].durationSec) {
+      currentIdx = 0;
+      elapsedInScene = 0;
+      renderScene(false);
+    }
+    setPlaying(!isPlaying);
+  });
+
+  prevBtn.addEventListener('click', () => goToScene(currentIdx - 1, true));
+  nextBtn.addEventListener('click', () => goToScene(currentIdx + 1, true));
+
+  voiceToggleBtn.addEventListener('click', () => {
+    voiceEnabled = !voiceEnabled;
+    voiceToggleBtn.setAttribute('aria-pressed', String(voiceEnabled));
+    voiceIcon.textContent = voiceEnabled ? '🔊' : '🔇';
+    voiceLabel.textContent = voiceEnabled ? 'Voiceover On' : 'Voiceover Off';
+    if (voiceEnabled) {
+      speakScene(scenes[currentIdx].narration);
+    } else {
+      stopSpeech();
+    }
+  });
+
+  transcriptToggleBtn.addEventListener('click', () => {
+    const isOpening = transcriptPanel.hasAttribute('hidden');
+    if (isOpening) transcriptPanel.removeAttribute('hidden');
+    else transcriptPanel.setAttribute('hidden', '');
+    transcriptToggleBtn.setAttribute('aria-expanded', String(isOpening));
+  });
+
+  function showCopied() {
+    copyScriptBtn.textContent = 'Copied!';
+    copyStatus.textContent = 'Script copied to clipboard.';
+    setTimeout(() => {
+      copyScriptBtn.textContent = 'Copy Script';
+      copyStatus.textContent = '';
+    }, 1500);
+  }
+
+  function fallbackCopy(text) {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); } catch (e) {}
+    document.body.removeChild(ta);
+    showCopied();
+  }
+
+  copyScriptBtn.addEventListener('click', () => {
+    const fullText = scenes.map((s, i) => `Scene ${i + 1}: ${s.title}\n${s.narration}`).join('\n\n');
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(fullText).then(showCopied).catch(() => fallbackCopy(fullText));
+    } else {
+      fallbackCopy(fullText);
+    }
+  });
+
+  progressTrack.addEventListener('click', (e) => {
+    const rect = progressTrack.getBoundingClientRect();
+    const ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+    seekTo(ratio * totalDuration);
+  });
+
+  scenes.forEach((s, i) => {
+    const div = document.createElement('div');
+    div.className = 'ex-tr-item';
+    const heading = document.createElement('strong');
+    heading.textContent = `Scene ${i + 1}: ${s.title} (${s.durationSec}s)`;
+    const body = document.createElement('div');
+    body.textContent = s.narration;
+    div.appendChild(heading);
+    div.appendChild(body);
+    transcriptList.appendChild(div);
+  });
+
+  if (!('speechSynthesis' in window)) {
+    voiceToggleBtn.disabled = true;
+    voiceToggleBtn.setAttribute('aria-disabled', 'true');
+    voiceToggleBtn.title = 'Voiceover is not supported by this browser.';
+    voiceLabel.textContent = 'Voiceover unavailable';
+    voiceIcon.textContent = '🔇';
+  }
+
+  progressTrack.addEventListener('keydown', (e) => {
+    const current = getElapsedTotal();
+    let target = current;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowUp') target = Math.min(totalDuration, current + 5);
+    else if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') target = Math.max(0, current - 5);
+    else if (e.key === 'Home') target = 0;
+    else if (e.key === 'End') target = totalDuration;
+    else return;
+    e.preventDefault();
+    seekTo(target);
+  });
+
+  function seekTo(targetSec) {
+    targetSec = Math.max(0, Math.min(totalDuration, targetSec));
+    let remaining = targetSec;
+    for (let i = 0; i < scenes.length; i++) {
+      if (remaining <= scenes[i].durationSec || i === scenes.length - 1) {
+        currentIdx = i;
+        elapsedInScene = Math.min(remaining, scenes[i].durationSec);
+        renderScene(isPlaying);
+        return;
+      }
+      remaining -= scenes[i].durationSec;
+    }
+  }
+
+  // Hold the stage at the height of the tallest scene (wider screens only) so the
+  // controls below don't jump around while the explainer plays.
+  function fitStage() {
+    sceneStage.style.minHeight = '';
+    if (!window.matchMedia('(min-width: 700px)').matches) return;
+    const probe = document.createElement('div');
+    probe.className = 'ex-stage';
+    probe.setAttribute('aria-hidden', 'true');
+    probe.style.cssText = 'position:absolute;visibility:hidden;left:-9999px;top:0;flex:none;width:' + sceneStage.clientWidth + 'px';
+    document.body.appendChild(probe);
+    let tallest = 0;
+    scenes.forEach((s) => { probe.innerHTML = s.render(); tallest = Math.max(tallest, probe.offsetHeight); });
+    document.body.removeChild(probe);
+    sceneStage.style.minHeight = tallest + 'px';
+  }
+  let fitTimer = null;
+  window.addEventListener('resize', () => { clearTimeout(fitTimer); fitTimer = setTimeout(fitStage, 150); });
+
+  // Stop any spoken narration if the visitor leaves the page.
+  window.addEventListener('pagehide', stopSpeech);
+
+  renderScene(false);
+  fitStage();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitStage);
+})();
+</script>
+</body>
+</html>
